@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.runtrackerapp.R
 import com.example.runtrackerapp.services.TrackingService
+
 import com.example.runtrackerapp.ui.viewmodels.MainViewModel
+import com.example.runtrackerapp.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.google.android.gms.maps.GoogleMap
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
@@ -22,6 +24,10 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
+
+        btnToggleRun.setOnClickListener {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
 
         mapView.getMapAsync {
             map = it
@@ -68,4 +74,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onSaveInstanceState(outState)
         mapView?.onSaveInstanceState(outState)
     }
+
+
+
 }
