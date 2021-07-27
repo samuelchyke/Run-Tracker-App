@@ -73,6 +73,7 @@ class TrackingService: LifecycleService() {
                         startForegroundService()
                         isFirstRun = false
                     } else{
+                        startForegroundService()
                         Timber.d("Resuming service....")
                     }
                 }
