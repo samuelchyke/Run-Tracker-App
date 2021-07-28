@@ -8,9 +8,10 @@ import com.example.runtrackerapp.repositories.MainRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel @ViewModelInject constructor(
-    val mainRepository: MainRepository
+    private val mainRepository: MainRepository
 ): ViewModel() {
 
+    val runsSortedByDate = mainRepository.getAllRunsSortedByDate()
 
     fun insertRun(run: Run) = viewModelScope.launch {
         mainRepository.insertRun(run)
