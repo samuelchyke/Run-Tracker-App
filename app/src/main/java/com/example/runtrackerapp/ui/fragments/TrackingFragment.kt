@@ -78,7 +78,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         }
 
         subscribeToObservers()
-    }
+    } //
 
     private fun subscribeToObservers() {
         TrackingService.isTracking.observe(viewLifecycleOwner, Observer {
@@ -96,7 +96,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             val formattedTime = TrackingUtility.getFormattedStopWatchTime(curTimeInMillis, true)
             tvTimer.text = formattedTime
         })
-    }
+    } //
 
     private fun toggleRun() {
         if(isTracking) {
@@ -105,7 +105,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         } else {
             sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
         }
-    }
+    } //
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -118,7 +118,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         if(curTimeInMillis > 0L) {
             this.menu?.getItem(0)?.isVisible = true
         }
-    }
+    } //
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
@@ -159,7 +159,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             btnToggleRun.text = "Stop"
             btnFinishRun.visibility = View.GONE
         }
-    }
+    } //
 
     private fun moveCameraToUser() {
         if(pathPoints.isNotEmpty() && pathPoints.last().isNotEmpty()) {
@@ -170,7 +170,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 )
             )
         }
-    }
+    } //
 
     private fun zoomToSeeWholeTrack() {
         val bounds = LatLngBounds.Builder()
@@ -188,7 +188,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 (mapView.height * 0.05f).toInt()
             )
         )
-    }
+    } //
 
     private fun endRunAndSaveToDb() {
         map?.snapshot { bmp ->
@@ -208,8 +208,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
             ).show()
             stopRun()
         }
-    }
-
+    } //
 
     private fun addAllPolylines() {
         for(polyline in pathPoints) {
@@ -219,7 +218,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 .addAll(polyline)
             map?.addPolyline(polylineOptions)
         }
-    }
+    } //
 
     private fun addLatestPolyline() {
         if(pathPoints.isNotEmpty() && pathPoints.last().size > 1) {
@@ -232,7 +231,7 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
                 .add(lastLatLng)
             map?.addPolyline(polylineOptions)
         }
-    }
+    } //
 
     private fun sendCommandToService(action: String) =
         Intent(requireContext(), TrackingService::class.java).also {
